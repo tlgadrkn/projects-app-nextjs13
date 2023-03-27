@@ -1,11 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation";
-import Button from "./Button";
-import Card from "./Card";
-import Input from "./Input";
-import { registerUser, signIn } from "@/lib/api";
+import { register, signin } from "@/lib/api";
 import { ChangeEvent, useCallback, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Card from "./Card";
+import Button from "./Button";
+import Input from "./Input";
 
 const registerContent = {
   linkUrl: "/signin",
@@ -29,25 +29,26 @@ type Props = {
   mode: "register" | "signin";
 };
 const AuthForm = ({ mode }: Props) => {
-  const [formState, setFormState] = useState(initialState);
-  const [error, setError] = useState("");
+  const [formState, setFormState] = useState({ ...initialState });
   const router = useRouter();
+  const [error, setError] = useState("");
 
   const handleSubmit = useCallback(
-    () => async (e: SubmitEvent) => {
-      e.preventDefault();
+    async (event: SubmitEvent) => {
+      event.preventDefault();
 
       try {
         if (mode === "register") {
-          await registerUser(formState);
+          await register(formState);
         } else {
-          await signIn(formState);
+          await signin(formState);
         }
+
         router.replace("/home");
       } catch (err) {
         setError(`Could not ${mode}`);
       } finally {
-        setFormState(initialState);
+        setFormState({ ...initialState });
       }
     },
     [formState, mode, router]

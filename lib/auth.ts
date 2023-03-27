@@ -14,7 +14,7 @@ export const createJWT = (user) => {
   // set expiration date for token
   const exp = iat + 60 * 60 * 24 * 7;
 
-  // put type line 34 and here same one
+  // put type line 34 and here same onexw
   return new SignJWT({ payload: { id: user.id, email: user.email } })
     .setProtectedHeader({ alg: "HS256", typ: "JWT" })
     .setExpirationTime(exp)
