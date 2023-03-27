@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 type Props = {
   children: ReactNode;
 };
-export default function AuthRootLayout({ children }: Props) {
+export default function DashboardRootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className="h-screen w-screen rainbow-mesh p-6">
