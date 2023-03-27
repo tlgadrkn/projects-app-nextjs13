@@ -14,8 +14,6 @@ const verifyJWT = async (jwt) => {
 export default async function middleware(req, res) {
   const { pathname } = req.nextUrl;
 
-  console.log(req);
-
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
